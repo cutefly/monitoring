@@ -3,6 +3,7 @@ const express = require("express");
 
 app = express();
 
+// Initialize logger
 let winston = require('winston');
 
 let logger = winston.createLogger({
@@ -15,13 +16,32 @@ let logger = winston.createLogger({
     ),
     transports: [
         new winston.transports.Console(),
-        new winston.transports.File({filename: 'app.log'})
+        new winston.transports.File({filename: 'logs/monitor.log'})
     ]
 });
 
+// Initialize Database
+let sqlite3 = require('sqlite3').verbose();
+let db = new sqlite3.Database('./db/monitor.db', (err) => {
+    if (err) {
+        logger.error(err.message);
+    }
+    logger.info('Connected to the sqlite database.');
+});
+
+function runningJob(period) {
+    db.serialize(function() {
+        db.each("SELECT seq, period, title FROM monitors WHERE period = 1", function(err, row) {
+            console.log(row.seq + ": " + row.title);
+        });
+    })
+}
+
 // 매 1분 실행
 cron.schedule("* * * * *", function() {
-	logger.debug("running a task every minute");
+    logger.debug("running a task every minute");
+    runningJob(1);
+;
 });
 
 // 매 5분 실행
