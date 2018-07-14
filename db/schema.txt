@@ -6,3 +6,32 @@ insert into monitors (period, title) values (3, '10분 모니터링');
 insert into monitors (period, title) values (4, '30분 모니터링');
 insert into monitors (period, title) values (5, '1시간 모니터링');
 insert into monitors (period, title) values (6, '1일 모니터링');
+
+insert into monitors (period, title) values (2, '5분 모니터링 - 2');
+
+DROP table monitors;
+
+CREATE TABLE monitors (
+    seq integer primary key,
+    period integer,
+    title text,
+    monitor_type text,
+    query text,
+    check_type text,
+    check_value text,
+    wait_time integer,
+    warn_time integer,
+    use_flag text,
+    sender text,
+    receiver text,
+    message_format text,
+    interval integer,
+    latest numeric
+);
+
+insert into monitors (period, title, monitor_type, query) values (1, '1분 모니터링', 'SQL', 'select 1 from dual');
+insert into monitors (period, title, monitor_type, query) values (2, '5분 모니터링', 'SERVER', 'http://www.google.com/');
+insert into monitors (period, title, monitor_type, query) values (3, '10분 모니터링', 'API', 'http://www.google.com');
+insert into monitors (period, title, monitor_type, query) values (4, '30분 모니터링', 'SQL', 'select 10 from dual');
+insert into monitors (period, title, monitor_type, query) values (5, '1시간 모니터링', 'SQL', 'select 30 from dual');
+insert into monitors (period, title, monitor_type, query) values (6, '1일 모니터링', 'SQL', 'select 1 from dual');

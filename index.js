@@ -38,15 +38,19 @@ const INTERVAL_ONE_DAY = 6;
 
 function runningJob(period) {
     db.serialize(function() {
-        db.each("SELECT seq, period, title FROM monitors WHERE period = " + period, function(err, row) {
-            logger.debug("[job info] seq : " + row.seq + ", title : " + row.title);
+        db.each("SELECT seq, period, title, monitor_type, query FROM monitors WHERE period = " + period, function(err, row) {
+            logger.debug("[job info] seq = " + row.seq + ", title = " + row.title);
             executeProcess(row);
         });
     })
 }
 
 function executeProcess(row) {
-    logger.info("execute process : " + row.title);
+    try {
+        logger.info("type = " + row.monitor_type + ", query = " + row.query);
+    } catch (e) {
+        logger.error(e);
+    }
 }
 
 // 매 1분 실행
