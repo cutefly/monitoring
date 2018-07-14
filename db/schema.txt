@@ -1,0 +1,8 @@
+CREATE TABLE monitors (seq integer primary key, period integer, title text);
+
+insert into monitors (period, title) values (1, '1분 모니터링');
+insert into monitors (period, title) values (2, '5분 모니터링');
+insert into monitors (period, title) values (3, '10분 모니터링');
+insert into monitors (period, title) values (4, '30분 모니터링');
+insert into monitors (period, title) values (5, '1시간 모니터링');
+insert into monitors (period, title) values (6, '1일 모니터링');
