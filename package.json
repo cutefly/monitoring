@@ -6,6 +6,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "node-cron": "^1.2.1",
+    "oracledb": "^2.3.0",
     "sqlite3": "^4.0.1",
     "winston": "^3.0.0"
   },
