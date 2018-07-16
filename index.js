@@ -1,3 +1,5 @@
+process.env.NODE_ENV = ( process.env.NODE_ENV && ( process.env.NODE_ENV ).trim().toLowerCase() == 'production' ) ? 'production' : 'development';
+
 const cron = require("node-cron");
 const express = require("express");
 
@@ -19,6 +21,13 @@ let logger = winston.createLogger({
         new winston.transports.File({filename: 'logs/monitor.log'})
     ]
 });
+
+// check profile
+if (process.env.NODE_ENV == 'production') {
+    logger.info("Production Mode");
+} else if (process.env.NODE_ENV == 'development') {
+    logger.info("Development Mode");
+}
 
 // Initialize Database
 let sqlite3 = require('sqlite3').verbose();

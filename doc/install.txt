@@ -1,0 +1,6 @@
+
+download oracle instant client
+export LD_LIBRARY_PATH=/home/chris/Applications/instantclient_12_2:$LD_LIBRARY_PATH
+
+download oracledb module
+npm install oracledb --save
